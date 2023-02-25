@@ -1,9 +1,9 @@
 import java.util.LinkedList;
 import java.util.Stack;
 
-public class Queuey {
+public class Queuey<D> {
 
-    LinkedList queue;
+    LinkedList<D> queue;
 
     public Queuey() {
         queue = new LinkedList();
@@ -17,26 +17,24 @@ public class Queuey {
         return queue.size();
     }
 
-    public void enqueue(int n){
+    public void enqueue(D n){
         queue.addLast(n);
-    } public void enqueue(String s){
-        queue.addLast(s);
     }
 
     // public int dequeue(){
     //     return (int) queue.remove(0);
     // } 
     
-    public String dequeue() {
-        return queue.remove(0).toString();
+    public D dequeue() {
+        return queue.remove(0);
     }
 
     // public int peek() {
     //     return (int) queue.get(0);
     // }
 
-    public String peek() {
-        return queue.get(0).toString();
+    public D peek() {
+        return queue.get(0);
     }
     
 
@@ -48,16 +46,16 @@ public class Queuey {
         System.out.println("Peek: "+ stacky.peek());
         System.out.print(stacky.pop() + " ");
         System.out.print(stacky.pop() + "!");
-        // Queuey numberQueue = new Queuey();
-        // // numberQueue.enqueue(5);
-        // // numberQueue.enqueue(7);
-        // // numberQueue.enqueue(6);
-        // numberQueue.enqueue("Hello");
-        // numberQueue.enqueue("World");
-        // numberQueue.enqueue("Azamat");
-        // System.out.println("First Out: " + numberQueue.dequeue());
-        // System.out.println("Peek at second item: " + numberQueue.peek());
-        // System.out.println("Second Out: "+ numberQueue.dequeue());
-        // System.out.println("Third Out: " + numberQueue.dequeue());
+        Queuey numberQueue = new Queuey();
+        // numberQueue.enqueue(5);
+        // numberQueue.enqueue(7);
+        // numberQueue.enqueue(6);
+        numberQueue.enqueue("Hello");
+        numberQueue.enqueue("World");
+        numberQueue.enqueue("Azamat");
+        System.out.println("First Out: " + numberQueue.dequeue());
+        System.out.println("Peek at second item: " + numberQueue.peek());
+        System.out.println("Second Out: "+ numberQueue.dequeue());
+        System.out.println("Third Out: " + numberQueue.dequeue());
     }
 }
