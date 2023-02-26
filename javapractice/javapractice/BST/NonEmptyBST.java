@@ -38,15 +38,15 @@ public class NonEmptyBST<D extends Comparable> {
     }
 
 
-    public NonEmptyBST<D> add(D elt){
-        if (data ==elt){
-            return this;
-        }else{
-            if (elt.compareTo(data)<0){
-                return new NonEmptyBST(data, left.add(elt), right);
-            }else{
-                return new NonEmptyBST(data, left, right.add(elt));
-            }
-        }
-    }
+    // public NonEmptyBST<D> add(D elt){
+    //     if (data ==elt){
+    //         return this;
+    //     }else{
+    //         if (elt.compareTo(data)<0){
+    //             return new NonEmptyBST(data, left.add(elt), right);
+    //         }else{
+    //             return new NonEmptyBST(data, left, right.add(elt));
+    //         }
+    //     }
+    // }
 }
