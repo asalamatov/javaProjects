@@ -48,5 +48,6 @@ public class TicTacToeApplication {
             System.out.println();
             System.out.println();
         }
+        sc.close();
     }
 }
