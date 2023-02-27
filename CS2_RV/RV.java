@@ -4,14 +4,28 @@ import java.awt.*;
 import javax.swing.*;
 
 public class RV extends JPanel{
+    /*
+     * Private values:
+     *  x, y = location
+     *  bodyColor : a Color object, which is returned from String inputColor
+     *  color : a Color object used in the switch case
+     *  printColor : a String, just a copy of user's color choice, it is used in toString() method
+     */
     private int x = 50;
     private int y = 50;
     private Color bodyColor;
     private Color color;
+    private String printColor;
     Image image;
-    
-    public Color getColor(String col) {
-        switch (col.toLowerCase()) {
+
+
+    /*
+     * I used this getColor() Function to convert String color to an object Color (datatype Color)
+     * I tried to use other methods to converst String directly to a Color object, but it did not work
+     * This function has many popular colors, if non of them is chosen, a default color "#E8D2A6" will be returned
+     */
+    public Color getColor(String inputtedColor) {
+        switch (inputtedColor.toLowerCase()) {
         case "black":
             color = Color.BLACK;
             break;
@@ -36,7 +50,7 @@ public class RV extends JPanel{
         case "lightgray":
             color = Color.LIGHT_GRAY;
             break;
-        case "magneta":
+        case "magenta":
             color = Color.MAGENTA;
             break;
         case "orange":
@@ -57,22 +71,39 @@ public class RV extends JPanel{
         return color;
         }
   
+    /*
+     * Constructor RV:
+     *  3 params: user's color choice, x, y
+     */
     public RV(String bodyInputColor, int position_x, int position_y){
       bodyColor = this.getColor(bodyInputColor);
+      printColor = bodyInputColor;
       x = position_x;
       y = position_y;
       
+      // used for setting the new canvas
       this.setPreferredSize(new Dimension(500,500));
     }
 
-    public RV(){
-      this.setPreferredSize(new Dimension(500,500));
-    }
+    // // Constructor overloading: for the case if there are some error in the new object declaration
+    // public RV(){
+    //   this.setPreferredSize(new Dimension(500,500));
+    // }
 
+    //toString method returns the text with color and the location of (x,y)
     public String toString(){
-      return ("The color of the RV is " + bodyColor + "\nThe x and y-positions are : (" + x + "," + y+").");
+      return ("The color of the RV is " + printColor + "\nThe x and y-positions are : (" + x + "," + y+").");
     }
   
+
+
+    /*
+     * This is paint() method ( = show() method):
+     *  draws the car with all its elements
+     *  and paints them
+     *  HOWEVER: I cannot name is as show()
+     *  It works only with functionName paint()
+     */
     public void paint(Graphics g){
       Graphics2D g2D = (Graphics2D) g;
 
