@@ -1,9 +1,10 @@
-package CS2_RV;
+package CS2_RV_copy;
 
 import java.awt.*;
 import javax.swing.*;
+import java.util.Scanner;
 
-public class RV extends JPanel{
+public class RV{
     /*
      * Private values:
      *  x, y = location
@@ -16,7 +17,24 @@ public class RV extends JPanel{
     private Color bodyColor;
     private Color color;
     private String printColor;
-    Image image;
+    String userColor;
+
+
+
+    /*
+     * input:  get's user color preference, and location of the vehicle
+     */
+    public String input(){
+        System.out.print("Input the color of the RV's body\n>> ");
+        Scanner scan = new Scanner(System.in);
+        userColor = scan.next();
+        System.out.print("Input the X-Position of the vehicle\n>> ");
+        x = scan.nextInt();
+        System.out.print("Now, input the Y-Position of the vehicle\n>> ");
+        y = scan.nextInt();
+        scan.close();
+        return userColor;
+    }
 
 
     /*
@@ -80,82 +98,61 @@ public class RV extends JPanel{
       printColor = bodyInputColor;
       x = position_x;
       y = position_y;
-      
-      // used for setting the new canvas
-      this.setPreferredSize(new Dimension(500,500));
+
     }
 
     //toString method returns the text with color and the location of (x,y)
     public String toString(){
       return ("The color of the RV is " + printColor + ".\nThe x and y-positions are : (" + x + "," + y+").");
     }
-  
 
 
     /*
-     * This is paint() method ( = show() method):
-     *  draws the car with all its elements
-     *  and paints them
-     *  HOWEVER: I cannot name is as show()
-     *  It works only with functionName paint()
+     * Show() method:
+     * displays the vehicle on the frame
+     * need to use JFrame, and JPanel
      */
-    public void paint(Graphics g){
+    public void show(){
+        JFrame myJFrame = new JFrame();
+        myJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myJFrame.setSize(500,500);
+        myJFrame.setVisible(true);
+        JPanel panel = new JPanel(){
+            @Override
+            public void paint(Graphics g){
 
 
-      Graphics2D g2D = (Graphics2D) g;
+                Graphics2D g2D = (Graphics2D) g;
+          
+                // g2D.drawImage(image,0,0,null);
+                // private Color bodyColor;
+                // bodyColor = decode("#E8D2A6");
+                // g2D.setPaint(Color.decode("#E8D2A6"));
+                g2D.setPaint(bodyColor);
+                //outline thickness 5 px
+                g2D.setStroke(new BasicStroke(5));
+                //drawing a body of the car
+                g2D.fillRect(x,y,150,90);
+                //drawing the nose of the car
+                g2D.fillRect(x+150,y+60,50, 30);
+                //drawing the door with different pink
+                g2D.setColor(Color.decode("#F48484"));       
+                g2D.fillRect(x+110, y+20, 25, 50);
+                //drawing the outline of the door with grey
+                g2D.setColor(Color.decode("#86A3B8"));
+                g2D.drawRect(x+110,y+20,25, 50);
+                //drawing the windows of the car with grey
+                g2D.fillRect(x+15, y+15, 30,30);
+                g2D.fillRect(x+60, y+15, 30, 30);
+                //drawing the tires
+                g2D.setColor(Color.black);
+                g2D.fillOval(x+30, y+85, 30,30);
+                g2D.fillOval(x+140, y+85, 30,30);
+                
+            }
+        };
+        //adding the Jpanel object to the JFrame object: inserting picture on the screen
+        myJFrame.add(panel);
 
-      // g2D.drawImage(image,0,0,null);
-      // private Color bodyColor;
-      // bodyColor = decode("#E8D2A6");
-      // g2D.setPaint(Color.decode("#E8D2A6"));
-      g2D.setPaint(bodyColor);
-      //outline thickness 5 px
-      g2D.setStroke(new BasicStroke(5));
-      //drawing a body of the car
-      g2D.fillRect(x,y,150,90);
-      //drawing the nose of the car
-      g2D.fillRect(x+150,y+60,50, 30);
-      //drawing the door with different pink
-      g2D.setColor(Color.decode("#F48484"));       
-      g2D.fillRect(x+110, y+20, 25, 50);
-      //drawing the outline of the door with grey
-      g2D.setColor(Color.decode("#86A3B8"));
-      g2D.drawRect(x+110,y+20,25, 50);
-      //drawing the windows of the car with grey
-      g2D.fillRect(x+15, y+15, 30,30);
-      g2D.fillRect(x+60, y+15, 30, 30);
-      //drawing the tires
-      g2D.setColor(Color.black);
-      g2D.fillOval(x+30, y+85, 30,30);
-      g2D.fillOval(x+140, y+85, 30,30);
-      
-
-      ///////////////////////////////////////////////
-/*
-      x=x+100;
-      y=y+120;
-
-      g2D.setPaint(bodyColor);
-      //outline thickness 5 px
-      g2D.setStroke(new BasicStroke(5));
-      //drawing a body of the car
-      g2D.fillRect(x,y,150,90);
-      //drawing the nose of the car
-      g2D.fillRect(x+150,y+60,50, 30);
-      //drawing the door with different pink
-      g2D.setColor(Color.decode("#F48484"));       
-      g2D.fillRect(x+110, y+20, 25, 50);
-      //drawing the outline of the door with grey
-      g2D.setColor(Color.decode("#86A3B8"));
-      g2D.drawRect(x+110,y+20,25, 50);
-      //drawing the windows of the car with grey
-      g2D.fillRect(x+15, y+15, 30,30);
-      g2D.fillRect(x+60, y+15, 30, 30);
-      //drawing the tires
-      g2D.setColor(Color.black);
-      g2D.fillOval(x+30, y+85, 30,30);
-      g2D.fillOval(x+140, y+85, 30,30);*/
-  }
-
-
+    }
 }

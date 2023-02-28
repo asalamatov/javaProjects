@@ -7,18 +7,24 @@ import javax.swing.*;
 
 public class MyJFrame extends JFrame{
     RV panel;
+    int x;
+    int y;
+    String userColor;
 
     public String input(){
-        System.out.println("Input the color of the RV's body\n>>");
+        System.out.print("Input the color of the RV's body\n>> ");
         Scanner scan = new Scanner(System.in);
-        String userColor = scan.next();
+        userColor = scan.next();
+        System.out.print("Input the X-Position of the vehicle\n>> ");
+        x = scan.nextInt();
+        System.out.print("Now, input the Y-Position of the vehicle\n>> ");
+        y = scan.nextInt();
         scan.close();
-        return (userColor!=null) ? userColor : "black";
+        return userColor;
     }
 
   MyJFrame(){
-    panel = new RV(input(),60,60);
-    
+    panel = new RV(input(),x,y);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     this.add(panel);
