@@ -13,12 +13,6 @@ public class RunTimePractice {
         return sum;
     }
 
-    // public static int[] findNumberOfRepetitionsv1(String s, char[] c){
-    //     int[] sums = new int[c.length];
-    //     for (int i=0; i<s.length(); i++){
-    //         for (int j=0; j<s)
-    //     }
-    // }
 
 
     public static void main(String[] args){
