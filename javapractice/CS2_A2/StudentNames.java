@@ -1,71 +1,44 @@
 package CS2_A2;
-
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Scanner;
 import java.io.*;
-import java.util.*;
+import java.util.Arrays;
 
-public class StudentNames {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+public class StudentNames{
+  public static void main(String[] args) throws IOException{
+    System.out.print("\n\n\n\nEnter the number of student names:\n>> ");
+    Scanner sc = new Scanner(System.in);
+    int numStudents = sc.nextInt();
+    String[] namesArray = new String[numStudents];
 
-        // Get the number of names to input from the user
-        System.out.print("Enter the number of names: ");
-        int numNames = scanner.nextInt();
-
-        // Create an array to hold the names
-        String[] names = new String[numNames];
-
-        // Get the names from the user
-        System.out.println("Enter the names:");
-        for (int i = 0; i < numNames; i++) {
-            names[i] = scanner.next();
-        }
-
-        // Sort the names
-        Arrays.sort(names);
-
-        // Write the names to a file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Students.txt"))) {
-            for (String name : names) {
-                writer.write(name);
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            System.err.println("Error writing to file: " + e.getMessage());
-        }
-
-        // Ask the user which name to eliminate
-        System.out.print("Enter a name to eliminate: ");
-        String nameToEliminate = scanner.next();
-
-        // Eliminate the name from the file
-        try (BufferedReader reader = new BufferedReader(new FileReader("Students.txt"));
-             BufferedWriter writer = new BufferedWriter(new FileWriter("StudentsModified.txt"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (!line.equals(nameToEliminate)) {
-                    writer.write(line);
-                    writer.newLine();
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading/writing file: " + e.getMessage());
-        }
-
-        // Read the modified file and output the names in reverse alphabetical order
-        try (BufferedReader reader = new BufferedReader(new FileReader("StudentsModified.txt"))) {
-            List<String> reversedNames = new ArrayList<>();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                reversedNames.add(line);
-            }
-            Collections.sort(reversedNames, Collections.reverseOrder());
-            System.out.println("Names in reverse alphabetical order:");
-            for (String name : reversedNames) {
-                System.out.println(name);
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
-        }
+    for (int i=0; i<numStudents; i++){
+      System.out.print("Enter the name of a student:>> ");
+      namesArray[i] = sc.next();
     }
-}
 
+    Path fileName = Path.of("Students.txt");
+    Arrays.sort(namesArray);
+    StringBuffer sb = new StringBuffer();
+    System.out.println("\n*******All Names******\n");
+    for (String n : namesArray){
+      System.out.println(n);
+      sb.append(n+"\n");
+      
+    }
+    Files.writeString(fileName, sb.toString());
+
+    System.out.print("\nWhich name to remove?\n>>");
+    String name2Remove = sc.next();
+    name2Remove+="\n";
+    String temp = sb.toString().replaceAll(name2Remove, "");
+    StringBuffer sb1 = new StringBuffer(temp);
+    Files.writeString(fileName, sb1.reverse().toString());
+
+    String textInFile = Files.readString(fileName);
+    System.out.println("*****Names in revers order******");
+    System.out.println(textInFile);
+  }
+
+  
+}
