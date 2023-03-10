@@ -8,10 +8,16 @@ public class Conn {
     public Conn(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            c = DriverManager.getConnection("jdbc:mysql:///ebs", "root", "SALazaCHEM2004@");
+            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebs", "root", "SALazaCHEM2004@");
             s = c.createStatement();
         }catch (Exception e){
             System.out.println(e);
         }
     }
+
+    public static void main(String[] args){
+        new Conn();
+    }
 }
+
+

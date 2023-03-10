@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Electricity">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Java45_Projects/Electricity/mysql-connector-java-8.0.27.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Java45_Projects/Electricity/rs2xml.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
